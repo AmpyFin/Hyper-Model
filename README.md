@@ -84,8 +84,8 @@ Each strategy is evaluated based on performance metrics and assigned a weight us
 1. **Clone the repository**
 
 ```bash
-git clone https://github.com/yeonholee50/AmpyFin.git
-cd AmpyFin
+git clone https://github.com/AmpyFin/Hyper-Model.git
+cd Hyper-Model
 ```
 
 2. **Install dependencies**
