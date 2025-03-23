@@ -1,4 +1,4 @@
-﻿# AmpyFin Trading System
+﻿# AmpyFin Trading System - Hyper-Model
 
 | Category | Badges |
 |----------|--------|
@@ -10,18 +10,21 @@
 
 ## Introduction
 
-AmpyFin is an advanced AI-powered trading system designed to trade within the NASDAQ-100. It leverages machine learning and algorithmic trading strategies to make data-driven investment decisions.
+AmpyFin Hyper-Model is a specialized subset of the AmpyFin trading system specifically designed to be more opportunistic and less pragmatic in its trading approach. While the standard AmpyFin system balances risk and reward, the Hyper-Model is configured through `control.py` to take more calculated risks, potentially yielding higher returns in favorable market conditions.
+
+This model leverages the same core AI-powered trading framework as AmpyFin but with adjusted parameters to identify and capitalize on higher-potential trading opportunities within the NASDAQ-100. The Hyper-Model employs more aggressive strategy weighting, specialized profit/loss ratios, and optimized asset allocation limits that favor opportunistic positions.
 
 ### Mission
 
-The primary goal of AmpyFin as an open source project is to:
+The primary goal of AmpyFin Hyper-Model as an open source project is to:
 
 - **Democratize Algorithmic Trading**: Make proven trading frameworks available for everyone to use freely
 - **Provide Transparency**: Offer insights into how machine learning can be applied to financial markets
 - **Fill a Gap**: Contribute to the open source community where there are few published frameworks for effective trading systems
 - **Enable Collaboration**: Create a platform for traders and developers to build upon and improve together
+- **Explore Opportunistic Strategies**: Demonstrate how parameter adjustments can create more aggressive trading models for those seeking higher-risk, higher-reward approaches
 
-While there are many theoretical trading models in academic literature, AmpyFin aims to bridge the gap between theory and practice with a working implementation that the community can use, study, and enhance.
+While there are many theoretical trading models in academic literature, AmpyFin Hyper-Model aims to bridge the gap between theory and practice with a working implementation that the community can use, study, and enhance, particularly for those interested in more opportunistic trading strategies.
 
 ## Tutorial Playlist
 
