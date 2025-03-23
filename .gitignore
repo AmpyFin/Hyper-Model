@@ -1,0 +1,8 @@
+config.py
+*.log
+.env
+.vscode/
+**/__pycache__/
+*.json
+**/.DS_Store
+.qodo
