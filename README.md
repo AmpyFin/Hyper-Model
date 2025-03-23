@@ -2,29 +2,29 @@
 
 | Category | Badges |
 |----------|--------|
-| **Project** | [![Team Size](https://img.shields.io/badge/Team%20Size-6-blue)](https://github.com/yeonholee50/AmpyFin/graphs/contributors) [![Open Source](https://img.shields.io/badge/Open%20Source-Yes-brightgreen)](https://github.com/yeonholee50/AmpyFin) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](http://makeapullrequest.com) |
+| **Project** | [![Team Size](https://img.shields.io/badge/Team%20Size-6-blue)](https://github.com/yeonholee50/AmpyFin/graphs/contributors) [![Proprietary](https://img.shields.io/badge/Proprietary-Yes-red)](https://github.com/yeonholee50/AmpyFin) |
 | **CI/CD** | [![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit)](https://github.com/pre-commit/pre-commit) [![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/yeonholee50/AmpyFin/pre-commit.yml?branch=main&label=linting)](https://github.com/yeonholee50/AmpyFin/actions/workflows/pre-commit.yml) |
 | **Quality** | [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black) [![Quality Gate Status](https://img.shields.io/badge/Quality%20Gate-Passing-success)](https://github.com/yeonholee50/AmpyFin) |
 | **Package** | [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/) |
-| **Meta** | [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) |
+| **Meta** | [![License: Proprietary](https://img.shields.io/badge/License-Proprietary-red.svg)](https://opensource.org/licenses/MIT) |
 
 ## Introduction
 
-AmpyFin Hyper-Model is a specialized subset of the AmpyFin trading system specifically designed to be more opportunistic and less pragmatic in its trading approach. While the standard AmpyFin system balances risk and reward, the Hyper-Model is configured through `control.py` to take more calculated risks, potentially yielding higher returns in favorable market conditions.
+AmpyFin Hyper-Model is a specialized proprietary subset of the AmpyFin trading system specifically designed to be more opportunistic and less pragmatic in its trading approach. While the standard AmpyFin system balances risk and reward, the Hyper-Model is configured through `control.py` to take more calculated risks, potentially yielding higher returns in favorable market conditions.
 
-This model leverages the same core AI-powered trading framework as AmpyFin but with adjusted parameters to identify and capitalize on higher-potential trading opportunities within the NASDAQ-100. The Hyper-Model employs more aggressive strategy weighting, specialized profit/loss ratios, and optimized asset allocation limits that favor opportunistic positions.
+This proprietary model leverages an advanced AI-powered trading framework with carefully adjusted parameters to identify and capitalize on higher-potential trading opportunities within the NASDAQ-100. The Hyper-Model employs more aggressive strategy weighting, specialized profit/loss ratios, and optimized asset allocation limits that favor opportunistic positions.
 
 ### Mission
 
-The primary goal of AmpyFin Hyper-Model as an open source project is to:
+The primary goal of AmpyFin Hyper-Model is to:
 
-- **Democratize Algorithmic Trading**: Make proven trading frameworks available for everyone to use freely
-- **Provide Transparency**: Offer insights into how machine learning can be applied to financial markets
-- **Fill a Gap**: Contribute to the open source community where there are few published frameworks for effective trading systems
-- **Enable Collaboration**: Create a platform for traders and developers to build upon and improve together
-- **Explore Opportunistic Strategies**: Demonstrate how parameter adjustments can create more aggressive trading models for those seeking higher-risk, higher-reward approaches
+- **Deliver Superior Trading Performance**: Implement proprietary trading algorithms for higher-risk, higher-reward scenarios
+- **Leverage Advanced Analytics**: Apply cutting-edge machine learning techniques to financial markets
+- **Optimize for Opportunistic Trading**: Fine-tune parameters to capture high-potential market movements
+- **Provide Competitive Advantage**: Offer a sophisticated trading system that outperforms standard approaches
+- **Balance Aggression with Intelligence**: Create a more opportunistic model without sacrificing data-driven decision making
 
-While there are many theoretical trading models in academic literature, AmpyFin Hyper-Model aims to bridge the gap between theory and practice with a working implementation that the community can use, study, and enhance, particularly for those interested in more opportunistic trading strategies.
+AmpyFin Hyper-Model represents a significant advancement in algorithmic trading, offering a proprietary implementation specifically designed for traders seeking more aggressive market opportunities.
 
 ## Tutorial Playlist
 
@@ -211,31 +211,8 @@ This ensures the system has properly ranked strategies before making investment 
 
 ## Contributing
 
-Contributions are welcome! Please submit pull requests or report issues. All contributions should be made to the **test branch**. Direct commits to the **main branch** are not accepted.
-
-### Pre-commit Hooks
-
-This project uses pre-commit hooks to ensure code quality. Before pushing your changes, please run pre-commit locally:
-
-1. Install pre-commit if you haven't already:
-```bash
-pip install pre-commit
-```
-
-2. Install the git hooks:
-```bash
-pre-commit install
-```
-
-3. Run pre-commit on all files:
-```bash
-pre-commit run --all-files
-```
-
-4. Fix any issues identified by the pre-commit hooks before pushing your changes.
-
-Running pre-commit locally will make the PR process smoother and reduce the need for revision requests.
+This is a proprietary trading system and is not open for public contributions. The codebase is maintained by an internal development team. If you have suggestions or have identified issues, please contact the system administrators directly.
 
 ## License
 
-This project is licensed under the MIT License. See the LICENSE file for details.
+This project is proprietary software. All rights reserved. Unauthorized copying, distribution, modification, public display, or public performance of this proprietary software is an infringement of the copyright holder's rights.
