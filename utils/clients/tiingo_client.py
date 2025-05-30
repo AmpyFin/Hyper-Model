@@ -21,12 +21,21 @@ from __future__ import annotations
 import importlib
 import os
 import time
+import logging
 from pathlib import Path
 from typing import Any, Dict, Optional
+from datetime import datetime, timedelta
 
 import pandas as pd
 import requests
 from requests import Response
+
+# Configure logging
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+)
+logger = logging.getLogger(__name__)
 
 # -----------------------------------------------------------------------------
 # Configuration discovery
@@ -70,7 +79,9 @@ def _request_with_retries(
             resp.raise_for_status()
             return resp
         # Otherwise back-off and retry
-        time.sleep(backoff_sec * 2 ** (attempt - 1))
+        wait_time = backoff_sec * 2 ** (attempt - 1)
+        logger.warning(f"Request failed with 5xx error, retrying in {wait_time:.1f}s (attempt {attempt}/{max_attempts})")
+        time.sleep(wait_time)
     # Last attempt still failed ➜ raise the error
     resp.raise_for_status()
     return resp  # makes mypy happy; never executed
@@ -103,6 +114,7 @@ class TiingoClientSingleton:  # pylint: disable=too-few-public-methods
                 "Tiingo API key not found. Set TIINGO_API_KEY in config.py "
                 "or export it as an environment variable."
             )
+        logger.debug("Initialized Tiingo client singleton")
 
     # ------------------------------------------------------------------ #
     # Low-level helper
@@ -111,6 +123,7 @@ class TiingoClientSingleton:  # pylint: disable=too-few-public-methods
         """Return parsed JSON from any Tiingo endpoint."""
         params["token"] = self.api_key
         url = f"{_BASE_URL}/{endpoint.lstrip('/')}"
+        logger.debug(f"Making request to {url}")
         return _request_with_retries("GET", url, params=params).json()
 
     # ------------------------------------------------------------------ #
@@ -125,29 +138,73 @@ class TiingoClientSingleton:  # pylint: disable=too-few-public-methods
         end_date:   str | None = None,
         tz_convert: bool = True,
     ) -> pd.DataFrame:
+        """Get historical data as a DataFrame."""
+        # Set default dates if not provided
+        if not end_date:
+            end_date = datetime.now().strftime("%Y-%m-%d")
+        if not start_date:
+            start_date = (datetime.now() - timedelta(days=30)).strftime("%Y-%m-%d")
 
-        # ── choose correct REST endpoint ───────────────────────────────
+        # Determine endpoint based on frequency
         if frequency == "daily":
             endpoint = f"tiingo/daily/{symbol}/prices"
-        else:                                       # intraday bars
+            params = {}
+        else:
             endpoint = f"iex/{symbol}/prices"
-            params = {"resampleFreq": frequency,
-              "columns": "open,high,low,close,volume"}   # <-- add this
+            params = {
+                "resampleFreq": frequency,
+                "columns": "open,high,low,close,volume,date",  # Explicitly request volume
+                "format": "json"
+            }
 
-        # ── query parameters ───────────────────────────────────────────
-        if start_date:
-            params["startDate"] = start_date
-        if end_date:
-            params["endDate"] = end_date
+        # Query parameters
+        params["startDate"] = start_date
+        params["endDate"] = end_date
 
-        # ── fetch & frame ──────────────────────────────────────────────
-        data = self.get_json(endpoint, **params)
-        df = pd.DataFrame(data)
+        try:
+            data = self.get_json(endpoint, **params)
+            if not data:
+                logger.warning(f"No data returned from {endpoint}")
+                return pd.DataFrame()  # Return empty DataFrame instead of None
+                
+            df = pd.DataFrame(data)
+            # Handle IEX endpoint data which has different column names
+            if frequency != "daily":
+                # Map IEX column names to standard names
+                column_map = {
+                    'open': 'open',
+                    'high': 'high',
+                    'low': 'low',
+                    'close': 'close',
+                    'volume': 'volume',
+                    'date': 'date'
+                }
+                # Rename columns if they exist
+                df = df.rename(columns=column_map)
+                
+                # If volume is missing but we have totalVolume, use that
+                if 'volume' not in df.columns and 'totalVolume' in df.columns:
+                    df['volume'] = df['totalVolume']
+                    df = df.drop('totalVolume', axis=1)
 
-        if tz_convert and "date" in df.columns:
-            df["date"] = pd.to_datetime(df["date"]).dt.tz_convert("UTC")
-            df.set_index("date", inplace=True)
-        return df
+            if tz_convert and "date" in df.columns:
+                df["date"] = pd.to_datetime(df["date"]).dt.tz_convert("UTC")
+                df.set_index("date", inplace=True)
+                
+            logger.info(f"Successfully retrieved {len(df)} rows for {symbol} from {start_date} to {end_date}")
+            
+            # Ensure all required columns are present
+            required_columns = ['open', 'high', 'low', 'close']
+            missing_columns = [col for col in required_columns if col not in df.columns]
+            if missing_columns:
+                logger.warning(f"Missing required columns in response: {missing_columns}")
+                return pd.DataFrame()
+                
+            return df
+            
+        except Exception as e:
+            logger.error(f"Error fetching data from {endpoint}: {e}")
+            return pd.DataFrame()  # Return empty DataFrame on error
 
 
 

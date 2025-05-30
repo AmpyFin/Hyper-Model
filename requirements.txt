@@ -3,3 +3,13 @@ pandas
 requests
 python-dotenv
 pyarrow
+torch
+ta
+lightgbm
+catboost
+wandb
+questdb
+pytz
+requests
+polygon-api-client
+finnhub-python

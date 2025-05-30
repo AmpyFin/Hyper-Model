@@ -26,6 +26,29 @@ def fetch_latest(symbols: List[str]) -> None:
             print(f"{sym:<6}  ${price:,.2f}")
 
 
+def get_current_price(symbol: str) -> float | None:
+    """
+    Get current price for a single ticker symbol.
+    
+    Parameters
+    ----------
+    symbol : str
+        Stock ticker symbol
+        
+    Returns
+    -------
+    float or None
+        Current price or None if not available
+    """
+    try:
+        client = price_client()
+        quote = client.get_json(f"iex/{symbol}")[0]  # list with one dict
+        price = quote.get("last") or quote.get("prevClose")
+        return float(price) if price is not None else None
+    except Exception:
+        return None
+
+
 if __name__ == "__main__":
     p = argparse.ArgumentParser(description="Fetch latest Tiingo prices")
     p.add_argument("symbols", nargs="+")

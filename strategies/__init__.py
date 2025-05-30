@@ -3,6 +3,11 @@ strategies package
 
 Automatic discovery of every *.py file in this directory that
 contains at least one class with both `.fit()` and `.predict()` methods.
+
+This module provides a collection of trading strategies, agents, and indicators 
+to be used with the AmpyFin platform.
+
+Each submodule provides a different category of strategies.
 """
 
 from __future__ import annotations
@@ -13,6 +18,45 @@ import pkgutil
 from pathlib import Path
 from types import ModuleType
 from typing import Dict, Type
+
+# Import standard submodules (without hyphens)
+from . import market_regime_agents
+from . import pattern_recognition_agents
+from . import volume_profile_agents
+from . import orderflow_analysis_agents
+from . import market_breadth_agents
+from . import mathematician_agents
+from . import computer_science_agents
+
+# Import hyphenated modules using importlib
+try:
+    micro_behavior_ta_lib = importlib.import_module("strategies.micro-behavior_ta-lib")
+except ImportError:
+    micro_behavior_ta_lib = None
+
+try:
+    linear_regression_sabino_ta_lib = importlib.import_module("strategies.linear_regression_sabino-ta-lib")
+except ImportError:
+    linear_regression_sabino_ta_lib = None
+
+try:
+    linear_regression_ta_lib = importlib.import_module("strategies.linear_regression_ta-lib")
+except ImportError:
+    linear_regression_ta_lib = None
+
+__all__ = [
+    "discover",
+    "market_regime_agents",
+    "pattern_recognition_agents",
+    "volume_profile_agents",
+    "orderflow_analysis_agents",
+    "market_breadth_agents",
+    "mathematician_agents",
+    "computer_science_agents", 
+    "micro_behavior_ta_lib",
+    "linear_regression_sabino_ta_lib",
+    "linear_regression_ta_lib",
+]
 
 # ------------------------------------------------------------------ #
 # public helper
