@@ -48,3 +48,4 @@ config.local.py
 ehthumbs.db
 Thumbs.db 
 config.py
+./config.py
