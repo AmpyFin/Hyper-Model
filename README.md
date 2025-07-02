@@ -1,2 +1,1 @@
-# specify what to put in control for choice of API Key
-# how to add new backtesting / pricing client apis
+# Setting up README as well speak - will be here sooner than later
