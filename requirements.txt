@@ -3,3 +3,4 @@ polygon-api-client>=1.12.3
 requests>=2.31.0
 pandas>=2.0.0
 lxml>=4.9.0
+duckdb

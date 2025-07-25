@@ -1,0 +1,5 @@
+We need to follow these steps:
+identify which adapter you want to add: 
+An adapter is essentially a service from we need to ingest data. We can utilize free data like yfinance for historical data but there are some incomplete and honestly incorrect data - some data values are shifted. also there are limitations. We can also utilize paid resources like tiingo. the adapter structure exists to be a plug and play model within a structure - all adapters that are implemented must follow the interface that is provided within the directory. - example is if we want to implement a historical data client adapter - the file must first be initialzied in the respective hsitoricak data client adapter directory and must implement hte interface historical_data_adapter
+
+then go to the registries/adapter_registry.py and do historical_data_adapter = the new class you implemented - see other historical data adapter classes if you need
